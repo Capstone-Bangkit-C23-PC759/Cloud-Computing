@@ -1,6 +1,4 @@
 const Joi = require("joi")
-var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
 
 module.exports = {
     schema : Joi.object({
@@ -19,10 +17,20 @@ module.exports = {
         // .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
         .required(),
     }),
+    signSchema:Joi.object({
+        username : Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+        password: Joi.string()
+        .min(8)
+        .max(30)
+        // .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+        .required(),
+    }),
     create: async function(username,email,password){
         const sql = global.sqlPool.promise()
-        // encrypt pass
-       password = bcrypt.hashSync(password, salt);
 
         const query = `INSERT INTO user (username,email,password)
         VALUES ('${username}','${email}','${password}') `
@@ -43,6 +51,23 @@ module.exports = {
             else{
                 throw "connectionError"
             }
+        }
+    },
+    readByUsername: async function(username){
+        const sql = global.sqlPool.promise();
+        const query = `SELECT  *  from user  where username ='${username}'`
+        try{
+            const [rows,fields] = await sql.query(query)
+            if(rows.length === 1){
+                const user = rows[0]
+                return user
+            }
+            throw "notRegistered"
+        }catch(err){
+            if(err === "notRegistered") 
+                throw err
+            else
+                throw "connectionError"
         }
     }
 }
