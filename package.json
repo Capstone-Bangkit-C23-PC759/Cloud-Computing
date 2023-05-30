@@ -1,0 +1,22 @@
+{
+  "name": "menhela",
+  "version": "1.0.0",
+  "description": "backend for menhela mobile app",
+  "main": "index.js",
+  "repository": "https://github.com/Capstone-Bangkit-C23-PC759/Cloud-Computing.git",
+  "author": "adio ihsan <adioihsan@gmail.com> and Syauqi Muhammad Abrar<syauqiabrar@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "glob": "^10.2.6",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
+  }
+}
