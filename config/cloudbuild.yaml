@@ -1,8 +1,8 @@
 steps:
 - name: node:16.9.0
-  entrypoint: yarn
+  entrypoint: npm
   args: ["install"]
-- name: node:10.15.1
+- name: node:16.9.0
   entrypoint: npm
   args: ["run", "create-env"]
   env:
@@ -12,5 +12,7 @@ steps:
     - 'MYSQL_PASSWORD=${_MYSQL_PASSWORD}'
     - 'JWT_SECRET=${_JWT_SECRET}'
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy","~/config/app.yaml"]
+  args: ["app", "deploy"]
 timeout: "1600s"
+options:
+  logging: CLOUD_LOGGING_ONLY
