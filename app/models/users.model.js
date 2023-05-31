@@ -38,7 +38,6 @@ module.exports = {
             const [rows,fields] = await sql.query(query)
             return {value:rows}
         }catch(err){
-            console.log(err)
             if(err.code === "ER_DUP_ENTRY"){
                 if(err.sqlMessage.includes("user.username"))
                     throw "usernameExist"
