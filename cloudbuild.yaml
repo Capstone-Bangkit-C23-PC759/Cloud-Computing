@@ -12,7 +12,7 @@ steps:
     - 'MYSQL_PASSWORD=${_MYSQL_PASSWORD}'
     - 'JWT_SECRET=${_JWT_SECRET}'
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy","config/app-dev.yaml"]
+  args: ["app", "deploy","app.yaml"]
 timeout: "1600s"
 options:
   logging: CLOUD_LOGGING_ONLY
