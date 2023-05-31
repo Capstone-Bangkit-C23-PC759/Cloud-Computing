@@ -14,5 +14,13 @@ module.exports =[
             },
         }
     },
+    {
+        method: 'GET',
+        path: '/profile',
+        handler: profileHandler.read,
+        options: {
+            auth:'jwt',
+        }
+    },
     
 ]

@@ -26,7 +26,14 @@ module.exports={
         })
         return updateResult
     },
-    // read:function(request,h){
-    //     const id = request.auth.credentials.id
-    // }
+    read:function(request,h){
+        const id = request.auth.credentials.id
+        const readResult = profile.read(id)
+        .then((result)=>{
+            return h.response({statusCode:200,profile:result.value})
+        }).catch((err)=>{
+            return Boom.internal("Cant connect to database")
+        })
+        return readResult
+    }
 }

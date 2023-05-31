@@ -52,5 +52,17 @@ module.exports={
             console.log(error)
             throw "connectionError"
         }
+    },
+    read:async function(id){
+        const sql = global.sqlPool.promise();
+        const query= `SELECT  *  from profile  where id='${id}'`
+
+        try {
+            const [rows,fields] = await sql.query(query)
+            return {value:rows}
+        } catch (error) {
+            console.log(error)
+            throw "connectionError"         
+        }
     }
 }
