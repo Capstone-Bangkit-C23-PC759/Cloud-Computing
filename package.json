@@ -4,12 +4,16 @@
   "description": "backend for menhela mobile app",
   "main": "index.js",
   "repository": "https://github.com/Capstone-Bangkit-C23-PC759/Cloud-Computing.git",
-  "author": "adio ihsan <adioihsan@gmail.com> and Syauqi Muhammad Abrar<syauqiabrar@gmail.com>",
+  "author": "adio ihsan <adioihsan@gmail.com>",
   "license": "MIT",
   "type": "commonjs",
+  "engines": {
+    "node": "16.x.x"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "create-env": "printenv > .env"
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.2",
