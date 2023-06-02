@@ -1,4 +1,3 @@
-const { options } = require("joi");
 const authHandler = require("../app/handlers/auth.handler");
 
 module.exports = [

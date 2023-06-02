@@ -46,6 +46,7 @@ module.exports = {
 
             if(isValid){
                 const userInfo ={
+                    id:user.id,
                     username:user.username,
                     email:user.email,
                     emailVerify:user.email_verify}
