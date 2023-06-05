@@ -21,7 +21,7 @@ module.exports = {
             validate.value.email,
             encPassword)
             .then(result=>{
-                return h.response({statusCode:201,message:"Registration success"}).code(201)
+                return h.response({statusCode:201,message:"Registration success",data:{username:validate.username}}).code(201)
             })
             .catch(err=>{
                 if(err === "usernameExist")
@@ -51,7 +51,7 @@ module.exports = {
                     email:user.email,
                     emailVerify:user.email_verify}
                 const token = createJwtToken(userInfo)
-                return h.response({token, userInfo}).code(200)
+                return h.response({statusCode:200,message:"Login success",data:{token,userInfo}}).code(200)
             }
             else
                 throw "wrongPassword"
