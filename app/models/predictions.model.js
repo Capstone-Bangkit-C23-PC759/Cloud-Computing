@@ -13,7 +13,7 @@ const clientjwt = new JWT({
 module.exports = {
     twitter:async function(username){
         try{
-            const userPost = await axios.get(`https://sns-scraper-dot-menhela.as.r.appspot.com/twitter/tweets?username=${username}&count=100`)
+            const userPost = await axios.get(process.env.SCRAPER_URL+`/twitter/tweets?username=${username}&count=100`)
             if(userPost.data.length > 0){
                 tokenizer.fitOnTexts(userPost.data);
                 sequenceText = tokenizer.textsToSequences(userPost.data);
@@ -44,6 +44,7 @@ module.exports = {
             else throw 'notFound'
         }
         catch(err){
+            console.log(err)
             throw err
         }
     }
