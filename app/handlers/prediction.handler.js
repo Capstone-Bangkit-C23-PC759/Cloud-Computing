@@ -15,5 +15,19 @@ module.exports ={
             return Boom.internal("Something wrong")
         })
         return predictionResult
-    }
+    },
+    // twitterv2:function(request,h){
+
+    //     const endpointId = "YOUR_ENDPOINT_ID";
+    //     const project = 'YOUR_PROJECT_ID';
+    //     const location = 'YOUR_PROJECT_LOCATION';
+    //     const {PredictionServiceClient} = require('@google-cloud/aiplatform');
+    //     const clientOptions = {
+    //         apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+    //       };
+    //       const predictionServiceClient = new PredictionServiceClient(clientOptions);
+
+    //       const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
+                
+    // }
 }
