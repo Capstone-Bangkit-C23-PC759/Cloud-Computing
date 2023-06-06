@@ -4,7 +4,7 @@ module.exports = {
     schema : Joi.object({
         username : Joi.string()
         .alphanum()
-        .min(3)
+        .min(5)
         .max(30)
         .required(),
 
@@ -20,7 +20,7 @@ module.exports = {
     signSchema:Joi.object({
         username : Joi.string()
         .alphanum()
-        .min(3)
+        .min(5)
         .max(30)
         .required(),
         password: Joi.string()

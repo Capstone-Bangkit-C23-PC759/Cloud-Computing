@@ -1,5 +1,4 @@
 const Joi = require("joi")
-const { max } = require("lodash")
 
 module.exports={
     schema : Joi.object({
@@ -49,20 +48,20 @@ module.exports={
                 return {value:{rows}}
             }
         } catch (error) {
-            console.log(error)
             throw "connectionError"
         }
     },
     read:async function(id){
         const sql = global.sqlPool.promise();
         const query= `SELECT  *  from profile  where id='${id}'`
-
         try {
             const [rows,fields] = await sql.query(query)
-            return {value:rows}
+            if(rows.length > 1)
+                return {value:rows}
+            else
+                throw "notSet"
         } catch (error) {
-            console.log(error)
-            throw "connectionError"         
+            throw error         
         }
     }
 }
