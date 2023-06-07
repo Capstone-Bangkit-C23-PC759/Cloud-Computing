@@ -19,7 +19,7 @@ module.exports={
             d.instagram || '',
             d.reddit || '')
         .then(result=>{
-           return h.response({statusCode:201,message:"Profile Updated"}).code(201)
+           return h.response({statusCode:201,message:"Profile Updated",data:{}}).code(201)
         })
         .catch(err=>{
             return Boom.internal("Cant connect to database")
@@ -30,9 +30,12 @@ module.exports={
         const id = request.auth.credentials.id
         const readResult = profile.read(id)
         .then((result)=>{
-            return h.response({statusCode:200,profile:result.value})
+            return h.response({statusCode:200,message:"",data:{profile:result.value}})
         }).catch((err)=>{
-            return Boom.internal("Cant connect to database")
+            if(err == "notSet")
+                return h.response({statusCode:200,message:"Profile not set yet",data:{profile:[]}}).code(200)
+            else
+                return Boom.internal("Cant connect to database")
         })
         return readResult
     }
