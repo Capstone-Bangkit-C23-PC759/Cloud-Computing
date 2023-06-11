@@ -6,6 +6,6 @@ module.exports = userInfo => jwt.sign({
     iss: 'urn:issuer:test',
     userInfo
 }, secretKey, {
-     expiresIn: '4h', algorithm: 'HS256' 
+     expiresIn: '7d', algorithm: 'HS256' 
  }
  );
