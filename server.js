@@ -23,7 +23,7 @@ const init = async () => {
             sub: false,
             nbf: true,
             exp: true,
-            maxAgeSec: 14400, // 4 hours
+            maxAgeSec: 604800, // 7 day
             timeSkewSec: 15
         },
         validate:afterTokenValidate
