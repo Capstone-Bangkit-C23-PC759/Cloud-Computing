@@ -11,11 +11,17 @@ module.exports = {
         email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
         .required(),
+
         password: Joi.string()
         .min(8)
         .max(30)
-        // .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-        .required(),
+        .required()
+        .label("password"),
+
+        rePassword: Joi.any()
+        .equal(Joi.ref('password'))
+        .required()
+        .messages({ 'any.only': 'Passwords does not match' })
     }),
     signSchema:Joi.object({
         username : Joi.string()
