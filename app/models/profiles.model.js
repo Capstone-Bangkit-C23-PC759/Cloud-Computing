@@ -56,7 +56,8 @@ module.exports={
         const query= `SELECT  *  from profile  where id='${id}'`
         try {
             const [rows,fields] = await sql.query(query)
-            if(rows.length > 1)
+            console.log(rows)
+            if(rows.length > 0)
                 return {value:rows}
             else
                 throw "notSet"
