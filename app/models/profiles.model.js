@@ -58,7 +58,7 @@ module.exports={
             const [rows,fields] = await sql.query(query)
             console.log(rows)
             if(rows.length > 0)
-                return {value:rows}
+                return {value:rows[0]}
             else
                 throw "notSet"
         } catch (error) {
