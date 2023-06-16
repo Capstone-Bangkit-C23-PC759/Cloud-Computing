@@ -8,9 +8,9 @@ module.exports ={
         const predictionResult = predictionModel.twitter(username)
         .then((result)=>{
             const predictionDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            predictionModel.saveHistory(id,"twitter",username,result.percentage,result.count,predictionDate)
+            predictionModel.saveHistory(id,"twitter",username,result.percentage,result.count,result.predLevel,predictionDate)
             return h.response({statusCode:200,message:"Prediction success",
-            data:{prediction:result.prediction,percentage:result.percentage,postCount:result.count}})
+            data:{prediction:result.prediction,percentage:result.percentage,level:result.predLevel,postCount:result.count}})
             .code(200)
         })
         .catch((err)=>{
