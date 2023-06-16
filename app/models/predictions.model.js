@@ -62,7 +62,7 @@ module.exports = {
     },
     getHistories:async function(userId){
         const sql = global.sqlPool.promise();
-        const query = `SELECT * from prediction where user_id='${userId}'`
+        const query = `SELECT * from prediction where user_id='${userId}' ORDER BY id DESC`
         try {
             const [rows,fields] = await sql.query(query)
             return rows
