@@ -56,7 +56,6 @@ module.exports={
         const query= `SELECT  *  from profile  where id='${id}'`
         try {
             const [rows,fields] = await sql.query(query)
-            console.log(rows)
             if(rows.length > 0)
                 return {value:rows[0]}
             else
