@@ -38,7 +38,8 @@ module.exports = {
                 })
                 const predAvg = predTotal /  predArr.length
                 const percentage = toInteger(predAvg*100)
-                return {prediction:predAvg,percentage:percentage,count:predArr.length}
+                const predLevel = percentage > 66 ? "High" : percentage > 33 ? "Medium" : "Low"  
+                return {prediction:predAvg,percentage:percentage,predLevel,count:predArr.length}
             }
             else throw 'notFound'
         }
@@ -47,10 +48,10 @@ module.exports = {
             throw err
         }
     },
-    saveHistory:async function(userId,snsName,snsUsername,resultPercentage,resultActivitiesCount,predictionDate){
+    saveHistory:async function(userId,snsName,snsUsername,resultPercentage,resultActivitiesCount,resultLevel,predictionDate){
         const sql = global.sqlPool.promise();
-        const query = `INSERT INTO menhela.prediction (user_id,sns_name,sns_username,result_percentage,result_activities_count,prediction_date)
-        VALUES (${userId},'${snsName}','${snsUsername}','${resultPercentage}','${resultActivitiesCount}','${predictionDate}');`
+        const query = `INSERT INTO menhela.prediction (user_id,sns_name,sns_username,result_percentage,result_activities_count,result_level,prediction_date)
+        VALUES (${userId},'${snsName}','${snsUsername}','${resultPercentage}','${resultActivitiesCount}','${resultLevel}','${predictionDate}');`
         try {
             const [rows,fields] = await sql.query(query)
             return rows
