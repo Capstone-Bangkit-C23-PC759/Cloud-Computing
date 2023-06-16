@@ -2,11 +2,16 @@ const Boom = require('@hapi/boom');
 const predictionModel = require("../models/predictions.model")
 module.exports ={
     twitter:function(request,h){
+        const id = request.auth.credentials.id
         const params = request.query
         const username = params.username
         const predictionResult = predictionModel.twitter(username)
         .then((result)=>{
-            return h.response({statusCode:200,message:"Prediction success",data:{prediction:result.prediction,percentage:result.percentage,postCount:result.count}}).code(200)
+            const predictionDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            predictionModel.saveHistory(id,"twitter",username,result.percentage,result.count,predictionDate)
+            return h.response({statusCode:200,message:"Prediction success",
+            data:{prediction:result.prediction,percentage:result.percentage,postCount:result.count}})
+            .code(200)
         })
         .catch((err)=>{
             if(err === 'notFound')
@@ -16,18 +21,31 @@ module.exports ={
         })
         return predictionResult
     },
-    // twitterv2:function(request,h){
+    readHistories:function(request,h){
+        const userId = request.auth.credentials.id
+        const historiesResult = predictionModel.getHistories(userId).then((result)=>{
+            return h.response({statusCode:200,message:"success",
+            data:result
+        })
+            .code(200)
+        }).catch((err)=>{
+            return Boom.internal("Something wrong")
+        })
 
-    //     const endpointId = "YOUR_ENDPOINT_ID";
-    //     const project = 'YOUR_PROJECT_ID';
-    //     const location = 'YOUR_PROJECT_LOCATION';
-    //     const {PredictionServiceClient} = require('@google-cloud/aiplatform');
-    //     const clientOptions = {
-    //         apiEndpoint: 'us-central1-aiplatform.googleapis.com',
-    //       };
-    //       const predictionServiceClient = new PredictionServiceClient(clientOptions);
+        return historiesResult
+    },
+    readLatest:function(request,h){
+        const userId = request.auth.credentials.id
+        const historiesResult = predictionModel.getLatest(userId).then((result)=>{
+            return h.response({statusCode:200,message:"success",
+            data:result[0]
+        })
+            .code(200)
+        }).catch((err)=>{
+            return Boom.internal("Something wrong")
+        })
 
-    //       const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-                
-    // }
+        return historiesResult
+    }
+
 }
